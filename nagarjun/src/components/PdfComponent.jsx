@@ -3,7 +3,9 @@ import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import styled from "styled-components";
 import ToolTip from "./ToolTip";
+
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
 
 // https://res.cloudinary.com/da8rrc2mj/image/upload/v1613735330/Fanel_Decor_Plus_Pty_Ltd_IN-000002817_1_x9lgcr.pdf
 
@@ -25,7 +27,10 @@ const Section = styled.div`
 const PdfContainer = styled.div`
   border: 1px solid green;
   position: relative;
+
 `;
+
+
 const DataContainer = styled.div`
   width: 400px;
   height: 100%;
@@ -90,11 +95,13 @@ const PdfComponent = () => {
     });
   };
 
+  
+
   return (
     <MainContainer>
       <Section>
-        <DataContainer></DataContainer>
         <PdfContainer>
+        
           <ToolTip {...toolTipProps} />
           <Document
             file="https://res.cloudinary.com/da8rrc2mj/image/upload/v1613735330/Fanel_Decor_Plus_Pty_Ltd_IN-000002817_1_x9lgcr.pdf"
@@ -105,9 +112,11 @@ const PdfComponent = () => {
               inputRef={canvasRef}
               width={800}
               pageNumber={pageNumber}
-            />
+              
+            />          
           </Document>
         </PdfContainer>
+        <DataContainer></DataContainer>
       </Section>
       <button onClick={handleClick}>click</button>
     </MainContainer>
