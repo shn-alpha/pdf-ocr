@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { Document, Page } from "react-pdf";
 import { pdfjs } from "react-pdf";
 import styled from "styled-components";
+import inside from "point-in-polygon";
+import * as apiResponse from "../apiResponse.json";
 import ToolTip from "./ToolTip";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -38,8 +40,6 @@ const PdfComponent = () => {
   const [canvasHeight, setCanvasHeight] = useState(null);
   const [canvasWidth, setCanvasWidth] = useState(null);
   const [canvasCtx, setCanvasCtx] = useState(null);
-  const canvasRef = useRef(null);
-  const [toolTipProps, setToolTipProps] = useState({});
 
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages);
@@ -53,41 +53,26 @@ const PdfComponent = () => {
     setCanvasHeight(height);
     setCanvasWidth(width);
     setCanvasCtx(ctx);
-
-    setToolTipProps({
-      canvasHeight:canvas?.height,
-      canvasWidth:canvas?.width,
-      left: 0.8692331314086914,
-      top: 0.20284776389598846,
-      width: 0.09422732144594193,
-      height: 0.014572471380233765,
-    });
   };
-  const handleClick = (_) => {
-    // canvasCtx.pop();
-    // canvasCtx.strokeStyle = "red";
-    // canvasCtx.setLineDash([5, 2]);
-    // canvasCtx.strokeRect(
-    //   0.8692331314086914 * canvasWidth - 2,
-    //   0.20284776389598846 * canvasHeight - 2,
-    //   0.09422732144594193 * canvasWidth + 4,
-    //   0.014572471380233765 * canvasHeight + 4
-    // );
-    // canvasCtx.fillStyle = "#2f2e2e40";
-    // canvasCtx.fillRect(
-    //   0.8692331314086914 * canvasWidth - 2,
-    //   0.20284776389598846 * canvasHeight - 2,
-    //   0.09422732144594193 * canvasWidth + 4,
-    //   0.014572471380233765 * canvasHeight + 4
-    // );
-    setToolTipProps({
-      canvasHeight,
-      canvasWidth,
-      width: 0.06981643289327621,
-      height: 0.0209606122225523,
-      left: 0.833181619644165,
-      top: 0.046331487596035004,
-    });
+
+  const handleClick = (text) => {
+    console.log({ text });
+  };
+
+  const getAllToolTips = (_) => {
+    return apiResponse.Blocks.reduce((acc, block) => {
+      if (block.BlockType === "LINE") {
+        acc.push(
+          <ToolTip
+            handleClick={handleClick}
+            {...block}
+            canvasHeight={canvasHeight}
+            canvasWidth={canvasWidth}
+          />
+        );
+      }
+      return acc;
+    }, []);
   };
 
   return (
@@ -95,21 +80,20 @@ const PdfComponent = () => {
       <Section>
         <DataContainer></DataContainer>
         <PdfContainer>
-          <ToolTip {...toolTipProps} />
+          {getAllToolTips()}
           <Document
             file="https://res.cloudinary.com/da8rrc2mj/image/upload/v1613735330/Fanel_Decor_Plus_Pty_Ltd_IN-000002817_1_x9lgcr.pdf"
             onLoadSuccess={onDocumentLoadSuccess}
           >
             <Page
               onRenderSuccess={handleRenderSuccess}
-              inputRef={canvasRef}
               width={800}
               pageNumber={pageNumber}
             />
           </Document>
         </PdfContainer>
       </Section>
-      <button onClick={handleClick}>click</button>
+      {/* <button onClick={handleClick}>click</button> */}
     </MainContainer>
   );
 };
