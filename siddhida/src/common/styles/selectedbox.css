@@ -1,0 +1,29 @@
+.smaller_box {
+  margin: 5px;
+  padding: 2px;
+  min-width: fit-content;
+  max-height: fit-content;
+  border: 2px solid red;
+  border-radius: 5px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.smaller_box > p {
+  margin: 0;
+  padding: 0;
+}
+.icon {
+  margin: 3px;
+  padding: 3px;
+  color: rgb(167, 89, 89);
+  cursor: pointer;
+}
+.icon:hover {
+  color: red;
+}
+.smaller_box_do_not_display {
+  display: none;
+}

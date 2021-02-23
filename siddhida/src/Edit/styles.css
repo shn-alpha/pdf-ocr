@@ -1,0 +1,249 @@
+.Highlight__part {
+    background: rgb(135, 149, 150) !important;
+    opacity: 0.5;
+  }
+
+  .Highlight--scrolledTo .Highlight__part {
+    background: rgb(0, 161, 201) !important;
+  }
+
+.pdf-card {
+  overflow-y: scroll !important;
+}
+
+.pdf-card .ant-card-body {
+  padding: 0;
+}
+
+.PdfHighlighter {
+  /* overflow: scroll; */
+  /* width: 200%;
+  height: 200%; */
+  min-width: 200%;
+  min-height: 200%;
+  overflow: visible;
+}
+.pdf-card::-webkit-scrollbar, .PdfHighlighter::-webkit-scrollbar, .invoice-verify-editable-card .ant-card-body::-webkit-scrollbar, .invoice-verify-editable-card::-webkit-scrollbar, .left-card::-webkit-scrollbar, .pdf-parent::-webkit-scrollbar {
+  width: 0px;
+  background: transparent !important;
+}
+
+.invoice-verify-table .ant-table-body::-webkit-scrollbar {
+  width: 20px;
+  background: scroll !important;
+}
+/* .textLayer, .page, .canvasWrapper {
+  width: 100% !important;
+} */
+
+.invoiceVerifyDetails .antd-pro-description-list-term, .invoiceVerifyUpdate .antd-pro-description-list-term, .invoiceVerifyAdditionalData .antd-pro-description-list-term {
+  font-size: 12px !important;
+  color: #919eab !important;
+}
+
+.invoiceVerifyDetails .antd-pro-description-list-detail, .invoiceVerifyUpdate .antd-pro-description-list-detail, .invoiceVerifyAdditionalData .antd-pro-description-list-detail {
+  font-size: 12px !important;
+  color: #637381 !important;
+}
+
+.invoice-verify-table .ant-table-column-title {
+  font-size: 11px !important;
+}
+
+.invoice-verify-form-item label {
+  text-transform: none;
+  font-size: 12px;
+  display: none;
+}
+
+.invoice-verify-form-item .ant-select-selection-item-content {
+  font-size: 12px;
+}
+
+.invoice-verify-form-item {
+  /* margin-top: -16px; */
+}
+
+.invoice-verify-form-date input {
+  font-size: 11px;
+}
+
+.invoice-verify-editable-card .ant-card-body {
+  overflow-x: hidden;
+}
+
+.update-table-select .ant-select-selection-item-content {
+  font-size: 10px;
+}
+
+.update-table-tax .ant-select-selection-item-content {
+  font-size: 10px;
+}
+
+/* .green-confidence .antd-pro-description-list-term, .orange-confidence .antd-pro-description-list-term, .red-confidence .antd-pro-description-list-term {
+  font-size: 12px !important;
+  color: #919eab !important;
+}  */
+
+.invoiceVerifyDetails .antd-pro-description-list-detail, .invoiceVerifyAdditionalData .antd-pro-description-list-detail {
+  font-size: 12px !important;
+  color: #637381 !important;
+  width: fit-content;
+} 
+
+/* .green-confidence .antd-pro-description-list-detail {
+  background-color: #32CD32;
+}
+
+.orange-confidence .antd-pro-description-list-detail {
+  background-color: orange;
+}
+
+.red-confidence  .antd-pro-description-list-detail{
+  background-color: #F08080;
+} */
+
+.invoiceVerifyDetails, .invoiceVerifyAdditionalData, .invoiceVerifyUpdate, .green-confidence, .red-confidence, .orange-confidence {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
+.invoice-verify-form-item .ant-select-selector div {
+  font-size: 11px !important;
+}
+
+.invoiceVerifyUpdate .antd-pro-description-list-detail, .invoiceVerifyAdditionalData .antd-pro-description-list-detail {
+  display: contents;
+}
+
+.invoiceVerifyAdditionalData .antd-pro-description-list-term, .invoiceVerifyAdditionalData .antd-pro-description-list-detail, .invoice-verify-additional-data-heading .ant-card-head-title {
+  font-size: 11px !important;
+}
+
+.onHover-highlight:hover {
+  /* border: 0.1px solid dodgerblue; */
+  background-color: aliceblue;
+  border-radius: 5px;
+}
+
+.selected-field .ant-select-selector{
+  border: 1px solid dodgerblue !important;
+  background-color: azure !important;
+  /* border-radius: 5px;
+  background-color: moccasin; */
+}
+
+.invoice-verify-table .ant-table-row-cell-break-word, .invoice-verify-table .selected-field {
+  padding: 0px !important;
+  /* margin: 0px; */
+}
+
+.update-table-select .ant-select-selector {
+  min-width: 100px;
+}
+
+.product-field .ant-select-selector {
+  min-width: 300px !important;
+}
+
+.update-table-tax .ant-select-selection--multiple {
+  min-width: 100px;
+}
+
+.update-table-select .ant-select-selection--multiple .ant-select-selector {
+  min-width: 100px;
+}
+
+.invoice-verify-form-item .ant-select-selection-item, .update-table-select .ant-select-selection-item {
+  background-color: transparent;
+  border-color: #ccd4dc;
+  max-width: 200px;
+}
+
+.scroll-popover {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.scroll-popover::-webkit-scrollbar {
+  width: 50px;
+  background: scroll;
+}
+
+.green-confidence .ant-select-selection-item {
+  background-color: transparent;
+  border-color: green;
+}
+
+.orange-confidence .ant-select-selection-item {
+  background-color: transparent;
+  border-color: orange;
+}
+
+.red-confidence .ant-select-selection-item {
+  background-color: transparent;
+  border-color: red;
+}
+
+.invoice-verify-form-item .ant-select-selection--multiple, .update-table-select .ant-select-selection--multiple {
+  width: 100%;
+}
+
+.zoom50 .pdfViewer .page {
+  zoom: 50%;
+}
+.zoom75 .pdfViewer .page {
+  zoom: 75%;
+}
+.zoom100 .pdfViewer .page {
+  zoom: 100%;
+}
+
+.zoom125 .pdfViewer .page {
+  zoom: 125%;
+}
+
+.zoom150 .pdfViewer .page {
+  zoom: 150%;
+}
+
+.rotate90 .pdfViewer .page {
+  transform: rotate(90deg);
+}
+
+.rotate180 .pdfViewer .page {
+  transform: rotate(180deg);
+}
+
+.rotate270 .pdfViewer .page {
+  transform: rotate(270deg);
+}
+
+.pdfViewer {
+  width: fit-content;
+}
+
+.MouseSelection {
+  background-color: lightblue !important;
+}
+/* .canvasWrapper canvas {
+  width: 200% !important;
+  height: 200% !important;
+} */
+
+.invoice-verify-editable-card .antd-pro-description-list-small .ant-row { margin: 0;}
+
+.ant-select-selector { width: 100% !important }
+
+.edit .ant-table-cell {
+  padding: 0% !important;
+}
+
+.invoice-verify-table .ant-table-container {
+  overflow-x: scroll;
+}
+
+.invoice-verify-table .ant-table-header, .invoice-verify-table .ant-table-body {
+  overflow: visible !important;
+}

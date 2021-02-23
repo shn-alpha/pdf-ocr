@@ -1,11 +1,12 @@
-import ViewComponent from './components/ViewComponent'
-import './App.css';
-import PdfComponent from './components/PdfComponent';
+import LeftCompo from "./common/leftCompo";
+import RightCompo from "./common/rightCompo";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-    <PdfComponent/>
+      <LeftCompo />
+      <RightCompo />
     </div>
   );
 }

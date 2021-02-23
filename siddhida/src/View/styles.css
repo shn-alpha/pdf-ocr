@@ -1,0 +1,176 @@
+.Highlight__part {
+    background: rgb(135, 149, 150) !important;
+    opacity: 0.5;
+  }
+
+  .Highlight--scrolledTo .Highlight__part {
+    background: rgb(0, 161, 201) !important;
+  }
+
+.pdf-card .ant-card-body {
+  padding: 0;
+}
+
+.pdf-card {
+  overflow-y: scroll !important;
+}
+
+
+.PdfHighlighter {
+  /* overflow: scroll; */
+  /* width: 200%;
+  height: 200%; */
+  min-width: 200%;
+  min-height: 200%;
+  overflow: visible;
+}
+.pdf-card::-webkit-scrollbar, .PdfHighlighter::-webkit-scrollbar, .invoice-verify-table .ant-table-body::-webkit-scrollbar, .details-card::-webkit-scrollbar, .pdf-parent::-webkit-scrollbar {
+    width: 0px;
+    background: transparent !important;
+}
+/* .textLayer, .page, .canvasWrapper {
+  width: 100% !important;
+} */
+
+.invoiceVerifyDetails .antd-pro-description-list-term, .invoiceVerifyUpdate .antd-pro-description-list-term, .invoiceVerifyAdditionalData .antd-pro-description-list-term {
+  font-size: 12px !important;
+  color: #919eab !important;
+}
+
+.invoiceVerifyDetails .antd-pro-description-list-detail, .invoiceVerifyUpdate .antd-pro-description-list-detail, .invoiceVerifyAdditionalData .antd-pro-description-list-detail {
+  font-size: 12px !important;
+  color: #637381 !important;
+}
+
+.invoice-verify-table .ant-table-column-title {
+  font-size: 11px !important;
+}
+
+.invoice-verify-form-item label {
+  text-transform: none;
+  font-size: 12px;
+  display: none;
+}
+
+.invoice-verify-form-item .ant-select-selection-selected-value {
+  font-size: 12px;
+}
+
+.invoice-verify-form-item {
+  /* margin-top: -16px; */
+}
+
+.invoice-verify-form-date input {
+  font-size: 11px;
+}
+
+.invoice-verify-editable-card .ant-card-body {
+  overflow-x: hidden;
+}
+
+.update-table-select .ant-select-selection-selected-value, .update-table-select .ant-select-selection__choice__content {
+  font-size: 10px;
+}
+
+.update-table-tax .ant-select-selection__choice__content {
+  font-size: 10px;
+}
+
+.green-confidence .antd-pro-description-list-term, .orange-confidence .antd-pro-description-list-term, .red-confidence .antd-pro-description-list-term {
+  font-size: 12px !important;
+  color: #919eab !important;
+} 
+
+.invoiceVerifyDetails .antd-pro-description-list-detail, .invoiceVerifyAdditionalData .antd-pro-description-list-detail, .green-confidence .antd-pro-description-list-detail, .orange-confidence .antd-pro-description-list-detail, .red-confidence .antd-pro-description-list-detail {
+  font-size: 12px !important;
+  color: #637381 !important;
+  width: fit-content;
+} 
+
+/* .green-confidence .antd-pro-description-list-detail {
+  background-color: #32CD32;
+}
+
+.orange-confidence .antd-pro-description-list-detail {
+  background-color: orange;
+}
+
+.red-confidence  .antd-pro-description-list-detail{
+  background-color: #F08080;
+} */
+
+.invoiceVerifyDetails, .invoiceVerifyAdditionalData, .invoiceVerifyUpdate, .green-confidence, .red-confidence, .orange-confidence {
+  display: flex;
+  /* align-items: center; */
+  justify-content: space-between;
+}
+
+.invoice-verify-form-item .ant-select-selection__rendered div {
+  font-size: 11px !important;
+}
+
+.invoiceVerifyUpdate .antd-pro-description-list-detail, .invoiceVerifyAdditionalData .antd-pro-description-list-detail {
+  display: contents;
+}
+
+.invoiceVerifyAdditionalData .antd-pro-description-list-term, .invoiceVerifyAdditionalData .antd-pro-description-list-detail, .invoice-verify-additional-data-heading .ant-card-head-title {
+  font-size: 11px !important;
+}
+
+/* .onHover-highlight:hover {
+  border: 1px solid dodgerblue;
+  border-radius: 5px;
+}
+
+.selected-field {
+  border: 1px solid red;
+  border-radius: 5px;
+  background-color: moccasin;
+} */
+
+.zoom50 .pdfViewer .page {
+  zoom: 50%;
+}
+.zoom75 .pdfViewer .page {
+  zoom: 75%;
+}
+.zoom100 .pdfViewer .page {
+  zoom: 100%;
+}
+
+.zoom125 .pdfViewer .page {
+  zoom: 125%;
+}
+
+.zoom150 .pdfViewer .page {
+  zoom: 150%;
+}
+
+.rotate90 .pdfViewer .page {
+  transform: rotate(90deg);
+}
+
+.rotate180 .pdfViewer .page {
+  transform: rotate(180deg);
+}
+
+.rotate270 .pdfViewer .page {
+  transform: rotate(270deg);
+}
+
+.pdfViewer {
+  width: fit-content;
+}
+
+/* .pdfViewer .page {
+  width: 200%;
+  height: 200%;
+} */
+
+.details-card .ant-card-body {
+  width: 100%;
+}
+
+.invoice-verify-table .ant-table-body {
+  max-height: none !important;
+}

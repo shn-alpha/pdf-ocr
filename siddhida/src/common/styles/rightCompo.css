@@ -1,0 +1,16 @@
+.right_side {
+  height: 100vh;
+  width: 50vw;
+  border: 2px solid palevioletred;
+  border-radius: 2px;
+  overflow-y: scroll;
+  background: rgb(113, 202, 240);
+}
+
+.right_side h1 {
+  padding-left: 20px;
+  width: 100%;
+  height: 50px;
+  border-bottom: 2px solid silver;
+  /* background: rgb(176, 171, 171); */
+}
