@@ -1,7 +1,6 @@
 import ViewComponent from './components/ViewComponent'
 import './App.css';
 
-
 function App() {
   return (
     <div className="App">
