@@ -38,56 +38,69 @@ const DataContainer = styled.div`
 const ViewComponent = () => {
   const [zoomLevel, setZoomLevel] = useState(1);
   const [rotateLevel, setRotateLevel] = useState(0);
+  let ctxImageData = null;
   let selection = {};
+  let mouseDownEventTriggered = false;
+
+  const getDimensions = (res, canvasWidth, canvasHeight) => {
+    let left, top, width, height;
+    if (rotateLevel === 0) {
+      left = res.Geometry.BoundingBox.Left * canvasWidth - 2;
+      top = res.Geometry.BoundingBox.Top * canvasHeight - 2;
+      width = res.Geometry.BoundingBox.Width * canvasWidth + 4;
+      height = res.Geometry.BoundingBox.Height * canvasHeight + 4;
+    } else if (rotateLevel === -90) {
+      left = res.Geometry.BoundingBox.Top * canvasWidth - 2;
+      top =
+        canvasHeight -
+        (res.Geometry.BoundingBox.Left + res.Geometry.BoundingBox.Width) *
+          canvasHeight -
+        2;
+      width = res.Geometry.BoundingBox.Height * canvasWidth + 4;
+      height = res.Geometry.BoundingBox.Width * canvasHeight + 4;
+    } else if (rotateLevel === 90) {
+      left =
+        canvasWidth -
+        (res.Geometry.BoundingBox.Top + res.Geometry.BoundingBox.Height) *
+          canvasWidth -
+        2;
+      top = res.Geometry.BoundingBox.Left * canvasHeight - 2;
+      width = res.Geometry.BoundingBox.Height * canvasWidth + 4;
+      height = res.Geometry.BoundingBox.Width * canvasHeight + 4;
+    } else if (rotateLevel === -180 || rotateLevel === 180) {
+      left =
+        canvasWidth -
+        (res.Geometry.BoundingBox.Left + res.Geometry.BoundingBox.Width) *
+          canvasWidth -
+        2;
+      top =
+        canvasHeight -
+        (res.Geometry.BoundingBox.Top + res.Geometry.BoundingBox.Height) *
+          canvasHeight -
+        2;
+      width = res.Geometry.BoundingBox.Height * canvasWidth + 4;
+      height = res.Geometry.BoundingBox.Width * canvasHeight + 4;
+    }
+
+    return { top, left, width, height };
+  };
 
   const setHighlighting = (canvas) => {
     const ctx = canvas.getContext("2d");
     let canvasWidth = canvas?.width;
     let canvasHeight = canvas?.height;
     apiResponse.Blocks.map((res) => {
-      let left, top, width, height;
       if (res.BlockType === "LINE") {
-        if (rotateLevel === 0) {
-          left = res.Geometry.BoundingBox.Left * canvasWidth - 2;
-          top = res.Geometry.BoundingBox.Top * canvasHeight - 2;
-          width = res.Geometry.BoundingBox.Width * canvasWidth + 4;
-          height = res.Geometry.BoundingBox.Height * canvasHeight + 4;
-        } else if (rotateLevel === -90) {
-          left = res.Geometry.BoundingBox.Top * canvasWidth - 2;
-          top =
-            canvasHeight -
-            (res.Geometry.BoundingBox.Left + res.Geometry.BoundingBox.Width) *
-              canvasHeight -
-            2;
-          width = res.Geometry.BoundingBox.Height * canvasWidth + 4;
-          height = res.Geometry.BoundingBox.Width * canvasHeight + 4;
-        } else if (rotateLevel === 90) {
-          left =
-            canvasWidth -
-            (res.Geometry.BoundingBox.Top + res.Geometry.BoundingBox.Height) *
-              canvasWidth -
-            2;
-          top = res.Geometry.BoundingBox.Left * canvasHeight - 2;
-          width = res.Geometry.BoundingBox.Height * canvasWidth + 4;
-          height = res.Geometry.BoundingBox.Width * canvasHeight + 4;
-        } else if (rotateLevel === -180 || rotateLevel === 180) {
-          left =
-            canvasWidth -
-            (res.Geometry.BoundingBox.Left + res.Geometry.BoundingBox.Width) *
-              canvasWidth -
-            2;
-          top =
-            canvasHeight -
-            (res.Geometry.BoundingBox.Top + res.Geometry.BoundingBox.Height) *
-              canvasHeight -
-            2;
-          width = res.Geometry.BoundingBox.Height * canvasWidth + 4;
-          height = res.Geometry.BoundingBox.Width * canvasHeight + 4;
-        }
+        const { top, left, width, height } = getDimensions(
+          res,
+          canvasWidth,
+          canvasHeight
+        );
         ctx.strokeStyle = "green";
         ctx.strokeRect(left, top, width, height);
       }
     });
+    ctxImageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
   };
 
   useEffect(() => {
@@ -106,6 +119,10 @@ const ViewComponent = () => {
   }, [zoomLevel, rotateLevel]);
 
   const handleMouseDown = (e) => {
+    mouseDownEventTriggered = false;
+    setTimeout(() => {
+      mouseDownEventTriggered = true;
+    }, 300);
     const canvas = document.querySelector("canvas");
     let canvasWidth = canvas?.width;
     let canvasHeight = canvas?.height;
@@ -121,6 +138,8 @@ const ViewComponent = () => {
     const x4 = e.layerX / canvasWidth;
     const y4 = e.layerY / canvasHeight;
     selection = { ...selection, x4, y4, x2: x4, y3: y4 };
+
+    ctxImageData && ctx.putImageData(ctxImageData, 0, 0);
     apiResponse.Blocks.forEach((res) => {
       if (res.BlockType === "LINE") {
         let polygon;
@@ -150,7 +169,16 @@ const ViewComponent = () => {
         res.Geometry.Polygon.forEach((point) => {
           const coOrdinates = [point.X, point.Y];
           const isMatched = inside(coOrdinates, polygon);
-          if (isMatched) console.log(res.Text);
+          if (isMatched) {
+            console.log(res.Text);
+            const { left, top, width, height } = getDimensions(
+              res,
+              canvasWidth,
+              canvasHeight
+            );
+            ctx.fillStyle = "#00800078";
+            ctx.fillRect(left, top, width, height);
+          }
         });
       }
     });
@@ -161,12 +189,14 @@ const ViewComponent = () => {
   };
 
   const handleClick = (e) => {
+    if (mouseDownEventTriggered) return;
     const canvas = document.querySelector("canvas");
     const ctx = canvas.getContext("2d");
     const canvasWidth = canvas?.width;
     const canvasHeight = canvas?.height;
     const x = e.layerX / canvasWidth;
     const y = e.layerY / canvasHeight;
+    ctxImageData && ctx.putImageData(ctxImageData, 0, 0);
     let coOrdinates;
     if (rotateLevel === 0) {
       coOrdinates = [x, y];
@@ -184,7 +214,17 @@ const ViewComponent = () => {
           [res.Geometry.Polygon[3].X, res.Geometry.Polygon[3].Y],
         ];
         const isMatched = inside(coOrdinates, polygon);
-        if (isMatched) console.log(res.Text);
+        if (isMatched) {
+          console.log(res.Text);
+          const { top, left, width, height } = getDimensions(
+            res,
+            canvasWidth,
+            canvasHeight
+          );
+          ctxImageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+          ctx.fillStyle = "#00800078";
+          ctx.fillRect(left, top, width, height);
+        }
       }
     });
   };
